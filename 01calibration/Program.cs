@@ -10,7 +10,7 @@ internal class Program
   {
     Console.WriteLine("Advent of Code day 1 puzzle 1");
 
-    char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
     int overAll = 0;
 
     try
@@ -22,14 +22,18 @@ internal class Program
         while ((line = read.ReadLine()) != null)
         {
           Console.WriteLine(line);
-          char first = line[line.IndexOfAny(digits)];
-          string reversed = line.Flip();
-          char last = reversed[reversed.IndexOfAny(digits)];
+          int first = line.firstNumber();
+          int last = line.lastNumber();
           if (first > 0 && last > 0)
           {
             string together = $"{first}{last}";
-            Console.WriteLine(together);
-            if (int.TryParse(together, out int thisValue)) overAll += thisValue;
+            Console.Write(together);
+            if (int.TryParse(together, out int thisValue))
+            {
+              overAll += thisValue;
+              Console.WriteLine($" : {thisValue}");
+            }
+            else { Console.WriteLine("--- ERROR ---"); };
           }
         }
       };
